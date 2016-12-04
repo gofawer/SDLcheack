@@ -35,7 +35,6 @@ int main()
     }
 
     SDL_Texture* texture = SDL_CreateTextureFromSurface( render, surface );
-    SDL_FreeSurface( surface );
     if( texture == nullptr ) {
         std::cout << "Texture error: " << SDL_GetError() << std::endl;
     }
@@ -46,6 +45,12 @@ int main()
         SDL_RenderPresent( render );    // update screen
         SDL_Delay( 1000 );
     }
+
+    SDL_FreeSurface( surface );
+    SDL_DestroyTexture( texture );
+    SDL_DestroyRenderer( render );
+    SDL_DestroyWindow( window );
+    SDL_Quit();
 
     return 0;
 }
